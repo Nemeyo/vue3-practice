@@ -16,13 +16,23 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver(
+        { importStyle: "sass" }
+      )],
     }),
   ],
   resolve: {
     // 實際路徑轉換
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        aaditionalData: `
+        @use "@/styles/element/index.scss" as *;`,
+      }
     }
   }
 })
